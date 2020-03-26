@@ -15,12 +15,12 @@ class m200324_070310_create_item extends Migration
     {
         $this->createTable('{{%item}}', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(512)->notNull(),
-            'description' => $this->text(),
-            'quantity' => $this->integer(),
-            'created_at' => $this->dateTime(),
+            'title' => $this->string(512)->notNull()->notNull(),
+            'description' => $this->text()->notNull(),
+            'quantity' => $this->integer()->notNull(),
+            'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->defaultValue(new Expression('NOW()')),
-            'category_id' => $this->integer(),
+            'category_id' => $this->integer()->notNull(),
             'category' => $this->string(512)->notNull(),
         ]);
 
@@ -36,8 +36,8 @@ class m200324_070310_create_item extends Migration
 
         $this->createTable('{{%item_tags}}', [
             'id' => $this->primaryKey(),
-            'item_id' => $this->integer(),
-            'tag_id' => $this->integer(),
+            'item_id' => $this->integer()->notNull(),
+            'tag_id' => $this->integer()->notNull(),
             'tag' => $this->string(512)->notNull(),
         ]);
 
