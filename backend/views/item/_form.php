@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
+use kartik\select2\Select2;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Item */
@@ -23,7 +25,12 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'created_at')->textInput() ?>
 
-    <?php echo d($categories); ?>
+    <?php echo Select2::widget([
+        'name' => 'state_2',
+        'value' => '',
+        'data' => $categories,
+        'options' => ['multiple' => false, 'placeholder' => 'Выберите категрию ...']
+    ]); ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

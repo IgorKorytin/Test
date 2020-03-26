@@ -1,5 +1,7 @@
 <?php
 // Composer
+use yii\helpers\ArrayHelper;
+
 require(__DIR__ . '/../../vendor/autoload.php');
 
 // Environment
@@ -13,12 +15,13 @@ require(__DIR__ . '/../../common/config/bootstrap.php');
 require(__DIR__ . '/../config/bootstrap.php');
 
 
-$config = \yii\helpers\ArrayHelper::merge(
+$config = ArrayHelper::merge(
     require(__DIR__ . '/../../common/config/base.php'),
     require(__DIR__ . '/../../common/config/web.php'),
     require(__DIR__ . '/../config/base.php'),
-    require(__DIR__ . '/../config/web.php'),
-    require_once(__DIR__ . '/../../debug.php')
+    require(__DIR__ . '/../config/web.php')
 );
+
+require_once(__DIR__ . '/../../debug.php');
 
 (new yii\web\Application($config))->run();
