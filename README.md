@@ -1,4 +1,4 @@
-# Yii 2 Starter Kit
+# For Mediaten Test 
 
 <!-- BADGES/ -->
 
@@ -8,28 +8,31 @@
 
 <!-- /BADGES -->
 
-This is Yii2 start application template.
+Тестовое задание, выполненное на основе Yii2 starter kit
 
-It was created and developing as a fast start for building an advanced sites based on Yii2.
 
-It covers typical use cases for a new project and will help you not to waste your time doing the same work in every project
-
-## Before you start
-Please, consider helping project via [contributions](https://github.com/yii2-starter-kit/yii2-starter-kit/issues) or [donations](#donations).
 
 ## TABLE OF CONTENTS
 - [Demo](#demo)
 - [Features](#features)
-- [Installation](docs/installation.md)
-    - [Manual installation](docs/installation.md#manual-installation)
-    - [Docker installation](docs/installation.md#docker-installation)
-    - [Vagrant installation](docs/installation.md#vagrant-installation)
+- [Installation](#installation)
 - [Components documentation](docs/components.md)
 - [Console commands](docs/console.md)
 - [Testing](docs/testing.md)
 - [FAQ](docs/faq.md)
 - [How to contribute?](#how-to-contribute)
 - [Have any questions?](#have-any-questions)
+
+## Instalation
+### Manual
+1. ```cp .env.dist .env```
+2. Run ```php composer.phar install```
+3. Run 
+```
+php console/yii app/setup
+npm install
+npm run build
+```
 
 ## Quickstart
 1. [Install composer](https://getcomposer.org)
@@ -41,7 +44,7 @@ Please, consider helping project via [contributions](https://github.com/yii2-sta
     cd myproject.com
     composer run-script docker:build
     ```
-5. Go to [http://yii2-starter-kit.localhost](http://yii2-starter-kit.localhost)
+5. Go to [http://test.kit](http://test.kit)
 
 ## FEATURES
 ### Admin backend
@@ -104,9 +107,6 @@ Please, consider helping project via [contributions](https://github.com/yii2-sta
 - [Swagger](https://swagger.io/) for API docs.
 
 ## DEMO
-Demo is hosted by awesome [Digital Ocean](https://m.do.co/c/d7f000191ea8)
-- Frontend: [http://yii2-starter-kit.terentev.net](http://yii2-starter-kit.terentev.net)
-- Backend: [http://backend.yii2-starter-kit.terentev.net](http://backend.yii2-starter-kit.terentev.net)
 
 `administrator` role account
 ```
@@ -125,12 +125,6 @@ Password: manager
 Login: user
 Password: user
 ```
-
-## How to contribute?
-You can contribute in any way you want. Any help appreciated, but most of all i need help with docs (^_^)
-
-## Have any questions?
-Mail to [eugene@terentev.net](mailto:eugene@terentev.net)
 
 ## READ MORE
 - [Yii2](https://github.com/yiisoft/yii2/tree/master/docs)
