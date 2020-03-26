@@ -30,7 +30,10 @@ class ManagerController extends Controller
                             'path' => Yii::getAlias('@storage/web'),
                             'URL' => Yii::getAlias('@storageUrl'),
                             'uploadDeny' => [
-                                'text/x-php', 'text/php', 'application/x-php', 'application/php'
+                                'text/x-php',
+                                'text/php',
+                                'application/x-php',
+                                'application/php'
                             ],
                         ],
                     ],

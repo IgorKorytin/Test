@@ -1,6 +1,10 @@
 <?php
-/* @var $this \yii\web\View view component instance */
-/* @var $message \yii\mail\MessageInterface the message bing composed */
+/* @var $this View view component instance */
+
+use yii\mail\MessageInterface;
+use yii\web\View;
+
+/* @var $message MessageInterface the message bing composed */
 /* @var $content string main view render result */
 
 echo $content;

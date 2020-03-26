@@ -3,7 +3,9 @@
 use trntv\filekit\widget\Upload;
 use trntv\yii\datetime\DateTimeWidget;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\imperavi\Widget;
 
 /**
  * @var $this       yii\web\View
@@ -24,14 +26,14 @@ use yii\helpers\Html;
     ->hint(Yii::t('backend', 'If you leave this field empty, the slug will be generated automatically'))
     ->textInput(['maxlength' => true]) ?>
 
-<?php echo $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(
+<?php echo $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(
     $categories,
     'id',
     'title'
 ), ['prompt' => '']) ?>
 
 <?php echo $form->field($model, 'body')->widget(
-    \yii\imperavi\Widget::class,
+    Widget::class,
     [
         'plugins' => ['fullscreen', 'fontcolor', 'video'],
         'options' => [

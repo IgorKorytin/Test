@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%tags}}".
@@ -12,7 +13,7 @@ use Yii;
  *
  * @property ItemTags[] $itemTags
  */
-class Tags extends \yii\db\ActiveRecord
+class Tags extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -20,6 +21,21 @@ class Tags extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%tags}}';
+    }
+
+    /**
+     * @return array
+     */
+    public static function getList()
+    {
+        $tags = self::find()->all();
+        if ($tags) {
+            foreach ($tags as $tag) {
+                $data[$tag->id] = $tag->tag;
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -45,7 +61,7 @@ class Tags extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItemTags()
     {

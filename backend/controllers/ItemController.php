@@ -3,13 +3,14 @@
 namespace backend\controllers;
 
 use app\models\Category;
-use app\models\CategoryQuery;
-use Yii;
 use app\models\Item;
+use app\models\ItemTags;
+use app\models\Tags;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -58,6 +59,21 @@ class ItemController extends Controller
     }
 
     /**
+     * Finds the Item model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Item the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Item::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
      * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -66,12 +82,26 @@ class ItemController extends Controller
     {
         $model = new Item();
         $categories = Category::getList();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $tags = Tags::getList();
+        $request = Yii::$app->request;
+        $item = $request->post('Item');
+        if ($model->load($request->post()) && $model->save()) {
+            if (isset($item['tags'])) {
+                foreach ($item['tags'] as $key => $tag_id) {
+                    $tag = Tags::findOne(array('id' => $tag_id));
+                    $item_tag = new ItemTags();
+                    $item_tag->item_id = $model->id;
+                    $item_tag->tag_id = $tag->id;
+                    $item_tag->tag = $tag->tag;
+                    $item_tag->save(false);
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', [
             'model' => $model,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -84,12 +114,24 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $old_tags = $model->tags;
+        $request = Yii::$app->request->post();
+        $item = $request['Item']['tags'];
+
+        $categories = Category::getList();
+        $tags = Tags::getList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->setTags($item);
+            $model->save(false);
+            echo d($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,
+            'categories' => $categories,
+            'tags' => $tags,
+
         ]);
     }
 
@@ -104,20 +146,5 @@ class ItemController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Item model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Item the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Item::findOne($id)) !== null) {
-            return $model;
-        }
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

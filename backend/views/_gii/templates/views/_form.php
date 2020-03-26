@@ -1,12 +1,13 @@
 <?php
 
+use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\crud\Generator */
 
-/* @var $model \yii\db\ActiveRecord */
+/* @var $model ActiveRecord */
 $model = new $generator->modelClass();
 $safeAttributes = $model->safeAttributes();
 if (empty($safeAttributes)) {
@@ -30,13 +31,15 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo "<?php echo " ?>$form->errorSummary($model); ?>
 
-<?php foreach ($generator->getColumnNames() as $attribute) {
-    if (in_array($attribute, $safeAttributes)) {
-        echo "    <?php echo " . $generator->generateActiveField($attribute) . " ?>\n\n";
-    }
-} ?>
+    <?php foreach ($generator->getColumnNames() as $attribute) {
+        if (in_array($attribute, $safeAttributes)) {
+            echo "    <?php echo " . $generator->generateActiveField($attribute) . " ?>\n\n";
+        }
+    } ?>
     <div class="form-group">
-        <?php echo "<?php echo " ?>Html::submitButton($model->isNewRecord ? <?php echo $generator->generateString('Create') ?> : <?php echo $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo "<?php echo " ?>Html::submitButton($model->isNewRecord
+        ? <?php echo $generator->generateString('Create') ?> : <?php echo $generator->generateString('Update') ?>,
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php echo "<?php " ?>ActiveForm::end(); ?>

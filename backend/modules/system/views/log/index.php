@@ -3,6 +3,7 @@
 use trntv\yii\datetime\DateTimeWidget;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\log\Logger;
 use yii\web\JsExpression;
 
 /**
@@ -32,15 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'attribute' => 'level',
             'value' => function ($model) {
-                return \yii\log\Logger::getLevelName($model->level);
+                return Logger::getLevelName($model->level);
             },
             'filter' => [
-                \yii\log\Logger::LEVEL_ERROR => 'error',
-                \yii\log\Logger::LEVEL_WARNING => 'warning',
-                \yii\log\Logger::LEVEL_INFO => 'info',
-                \yii\log\Logger::LEVEL_TRACE => 'trace',
-                \yii\log\Logger::LEVEL_PROFILE_BEGIN => 'profile begin',
-                \yii\log\Logger::LEVEL_PROFILE_END => 'profile end',
+                Logger::LEVEL_ERROR => 'error',
+                Logger::LEVEL_WARNING => 'warning',
+                Logger::LEVEL_INFO => 'info',
+                Logger::LEVEL_TRACE => 'trace',
+                Logger::LEVEL_PROFILE_BEGIN => 'profile begin',
+                Logger::LEVEL_PROFILE_END => 'profile end',
             ],
         ],
         'category',

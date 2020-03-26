@@ -1,11 +1,10 @@
 <?php
 
-use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Item */
-/* @var $categories  */
+/* @var $categories */
+/* @var $tags */
 
 $this->title = Yii::t('backend', 'Create {modelClass}', [
     'modelClass' => 'Item',
@@ -18,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo $this->render('_form', [
         'model' => $model,
         'categories' => $categories,
+        'tags' => $tags,
     ]) ?>
 
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use backend\models\search\PageSearch;
 use common\grid\EnumColumn;
 use common\models\Page;
 use yii\grid\GridView;
@@ -7,7 +8,7 @@ use yii\helpers\Html;
 
 /**
  * @var $this         yii\web\View
- * @var $searchModel  \backend\models\search\PageSearch
+ * @var $searchModel  PageSearch
  * @var $dataProvider yii\data\ActiveDataProvider
  * @var $model        common\models\Page
  */

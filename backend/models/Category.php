@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -12,7 +13,7 @@ use Yii;
  *
  * @property ItemCategory[] $itemCategories
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -20,6 +21,30 @@ class Category extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%category}}';
+    }
+
+    /**
+     * @return array
+     */
+    public static function getList()
+    {
+        $categories = self::find()->all();
+        if ($categories) {
+            foreach ($categories as $category) {
+                $data[$category->id] = $category->category;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return CategoryQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new CategoryQuery(get_called_class());
     }
 
     /**
@@ -45,34 +70,10 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItemCategories()
     {
         return $this->hasMany(ItemCategory::className(), ['category_id' => 'id']);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getList()
-    {
-        $categories = self::find()->all();
-        if ($categories) {
-            foreach ($categories as $category) {
-                $data[$category->id] = $category->category;
-            }
-        }
-
-        return $data;
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return CategoryQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new CategoryQuery(get_called_class());
     }
 }

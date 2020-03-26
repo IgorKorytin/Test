@@ -1,6 +1,7 @@
 <?php
 
 use backend\modules\translation\models\Source;
+use common\base\MultiModel;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 
@@ -8,7 +9,7 @@ use yii\helpers\ArrayHelper;
  * @var $this               yii\web\View
  * @var $searchModel        backend\modules\translation\models\search\SourceSearch
  * @var $dataProvider       yii\data\ActiveDataProvider
- * @var $model              \common\base\MultiModel
+ * @var $model              MultiModel
  * @var $languages          array
  */
 
@@ -19,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box box-success collapsed-box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?php echo Yii::t('backend', 'Create {modelClass}', ['modelClass' => 'Source Message']) ?></h3>
+            <h3 class="box-title"><?php echo Yii::t('backend', 'Create {modelClass}',
+                    ['modelClass' => 'Source Message']) ?></h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>

@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%item_tags}}".
@@ -15,7 +16,7 @@ use Yii;
  * @property Item $item
  * @property Tags $tag0
  */
-class ItemTags extends \yii\db\ActiveRecord
+class ItemTags extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -27,6 +28,15 @@ class ItemTags extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
+     * @return ItemTagsQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ItemTagsQuery(get_called_class());
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -34,8 +44,20 @@ class ItemTags extends \yii\db\ActiveRecord
             [['item_id', 'tag_id'], 'integer'],
             [['tag'], 'required'],
             [['tag'], 'string', 'max' => 512],
-            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
-            [['tag_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tags::className(), 'targetAttribute' => ['tag_id' => 'id']],
+            [
+                ['item_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Item::className(),
+                'targetAttribute' => ['item_id' => 'id']
+            ],
+            [
+                ['tag_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Tags::className(),
+                'targetAttribute' => ['tag_id' => 'id']
+            ],
         ];
     }
 
@@ -53,7 +75,7 @@ class ItemTags extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItem()
     {
@@ -61,19 +83,10 @@ class ItemTags extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getTag0()
     {
         return $this->hasOne(Tags::className(), ['id' => 'tag_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return ItemCategoryQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new ItemCategoryQuery(get_called_class());
     }
 }

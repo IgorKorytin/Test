@@ -10,9 +10,9 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property integer $level
- * @property string  $category
+ * @property string $category
  * @property integer $log_time
- * @property string  $prefix
+ * @property string $prefix
  * @property integer $message
  */
 class SystemLog extends ActiveRecord

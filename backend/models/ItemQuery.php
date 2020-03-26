@@ -2,12 +2,14 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[Item]].
  *
  * @see Item
  */
-class ItemQuery extends \yii\db\ActiveQuery
+class ItemQuery extends ActiveQuery
 {
     /*public function active()
     {

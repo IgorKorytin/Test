@@ -2,12 +2,14 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[ItemTags]].
  *
  * @see ItemTags
  */
-class ItemTagsQuery extends \yii\db\ActiveQuery
+class ItemTagsQuery extends ActiveQuery
 {
     /*public function active()
     {

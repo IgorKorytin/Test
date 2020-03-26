@@ -1,11 +1,12 @@
 <?php
 
+use common\base\MultiModel;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /**
  * @var $this      yii\web\View
- * @var $model     \common\base\MultiModel
+ * @var $model     MultiModel
  * @var $languages array
  */
 

@@ -73,18 +73,6 @@ class MenuController extends Controller
     /**
      * @param integer $id
      *
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findWidget($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * @param integer $id
-     *
      * @return WidgetMenu the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -95,5 +83,17 @@ class MenuController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findWidget($id)->delete();
+
+        return $this->redirect(['index']);
     }
 }

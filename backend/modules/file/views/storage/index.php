@@ -1,12 +1,13 @@
 <?php
 
+use backend\modules\file\models\search\FileStorageItemSearch;
 use trntv\yii\datetime\DateTimeWidget;
 use yii\grid\GridView;
 use yii\web\JsExpression;
 
 /**
  * @var $this         yii\web\View
- * @var $searchModel  \backend\modules\file\models\search\FileStorageItemSearch
+ * @var $searchModel  FileStorageItemSearch
  * @var $dataProvider yii\data\ActiveDataProvider
  * @var $components   array
  * @var $totalSize    integer

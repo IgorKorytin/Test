@@ -3,18 +3,19 @@
 namespace backend\modules\translation\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%i18n_message}}".
  *
  * @property integer $id
- * @property string  $language
- * @property string  $translation
- * @property string  $sourceMessage
- * @property string  $category
+ * @property string $language
+ * @property string $translation
+ * @property string $sourceMessage
+ * @property string $category
  *
- * @property Source  $sourceMessageModel
+ * @property Source $sourceMessageModel
  */
 class Translation extends ActiveRecord
 {
@@ -53,14 +54,14 @@ class Translation extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => Yii::t('backend', 'ID'),
-            'language'    => Yii::t('backend', 'Language'),
+            'id' => Yii::t('backend', 'ID'),
+            'language' => Yii::t('backend', 'Language'),
             'translation' => Yii::t('backend', 'Translation'),
         ];
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getSourceMessageModel()
     {

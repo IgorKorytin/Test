@@ -3,6 +3,8 @@
 namespace backend\modules\rbac\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "rbac_auth_assignment".
@@ -13,7 +15,7 @@ use Yii;
  *
  * @property RbacAuthItem $itemName
  */
-class RbacAuthAssignment extends \yii\db\ActiveRecord
+class RbacAuthAssignment extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -32,7 +34,13 @@ class RbacAuthAssignment extends \yii\db\ActiveRecord
             [['item_name', 'user_id'], 'required'],
             [['created_at'], 'integer'],
             [['item_name', 'user_id'], 'string', 'max' => 64],
-            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacAuthItem::class, 'targetAttribute' => ['item_name' => 'name']],
+            [
+                ['item_name'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => RbacAuthItem::class,
+                'targetAttribute' => ['item_name' => 'name']
+            ],
         ];
     }
 
@@ -49,7 +57,7 @@ class RbacAuthAssignment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItemName()
     {

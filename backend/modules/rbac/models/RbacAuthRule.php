@@ -3,6 +3,8 @@
 namespace backend\modules\rbac\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "rbac_auth_rule".
@@ -14,7 +16,7 @@ use Yii;
  *
  * @property RbacAuthItem[] $rbacAuthItems
  */
-class RbacAuthRule extends \yii\db\ActiveRecord
+class RbacAuthRule extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -51,7 +53,7 @@ class RbacAuthRule extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRbacAuthItems()
     {

@@ -1,9 +1,11 @@
 <?php
-use backend\assets\BackendAsset;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 
-/* @var $this \yii\web\View */
+use backend\assets\BackendAsset;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\web\View;
+
+/* @var $this View */
 /* @var $content string */
 
 $bundle = BackendAsset::register($this);
@@ -32,10 +34,10 @@ $this->params['body-class'] = $this->params['body-class'] ?? null;
         Yii::$app->keyStorage->get('backend.layout-collapsed-sidebar') ? 'sidebar-collapse' : null,
         Yii::$app->keyStorage->get('backend.sidebar-mini') ? 'sidebar-mini' : null,
     ])
-])?>
-    <?php $this->beginBody() ?>
-        <?php echo $content ?>
-    <?php $this->endBody() ?>
+]) ?>
+<?php $this->beginBody() ?>
+<?php echo $content ?>
+<?php $this->endBody() ?>
 <?php echo Html::endTag('body') ?>
 </html>
 <?php $this->endPage() ?>

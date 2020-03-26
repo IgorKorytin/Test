@@ -1,8 +1,9 @@
 <?php
 
 use common\models\UserProfile;
-use yii\helpers\Html;
+use trntv\filekit\widget\Upload;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\UserProfile */
@@ -15,8 +16,8 @@ $this->title = Yii::t('backend', 'Edit profile')
 
     <?php $form = ActiveForm::begin() ?>
 
-    <?php echo $form->field($model, 'picture')->widget(\trntv\filekit\widget\Upload::class, [
-        'url'=>['avatar-upload']
+    <?php echo $form->field($model, 'picture')->widget(Upload::class, [
+        'url' => ['avatar-upload']
     ]) ?>
 
     <?php echo $form->field($model, 'firstname')->textInput(['maxlength' => 255]) ?>

@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <p>
-    <?php echo Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], ['class' => 'btn btn-danger', 'data' => ['method' => 'post']]) ?>
+    <?php echo Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id],
+        ['class' => 'btn btn-danger', 'data' => ['method' => 'post']]) ?>
 </p>
 
 <?php echo DetailView::widget([

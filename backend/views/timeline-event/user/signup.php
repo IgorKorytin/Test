@@ -3,6 +3,9 @@
  * @author Eugene Terentev <eugene@terentev.net>
  * @var $model common\models\TimelineEvent
  */
+
+use yii\helpers\Html;
+
 ?>
 <div class="timeline-item">
     <span class="time">
@@ -22,7 +25,7 @@
     </div>
 
     <div class="timeline-footer">
-        <?php echo \yii\helpers\Html::a(
+        <?php echo Html::a(
             Yii::t('backend', 'View user'),
             ['/user/view', 'id' => $model->data['user_id']],
             ['class' => 'btn btn-success btn-sm']

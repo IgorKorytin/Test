@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <p>
-        <?php echo Html::a(Yii::t('frontend', 'Create Rbac Auth Item Child'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('frontend', 'Create Rbac Auth Item Child'), ['create'],
+            ['class' => 'btn btn-success']) ?>
     </p>
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,

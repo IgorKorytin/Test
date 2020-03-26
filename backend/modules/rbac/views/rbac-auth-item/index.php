@@ -1,8 +1,8 @@
 <?php
 
 use common\grid\EnumColumn;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\rbac\Item;
 
 /* @var $this yii\web\View */
@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => EnumColumn::class,
                 'attribute' => 'type',
                 'enum' => [
-                        Item::TYPE_ROLE => 'role',
-                        Item::TYPE_PERMISSION => 'permission',
+                    Item::TYPE_ROLE => 'role',
+                    Item::TYPE_PERMISSION => 'permission',
                 ]
             ],
             'description:ntext',

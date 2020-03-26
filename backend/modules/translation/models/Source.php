@@ -4,14 +4,15 @@ namespace backend\modules\translation\models;
 
 use backend\modules\translation\traits\ModuleTrait;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%i18n_source_message}}".
  *
- * @property integer       $id
- * @property string        $category
- * @property string        $message
+ * @property integer $id
+ * @property string $category
+ * @property string $message
  *
  * @property Translation[] $translations
  */
@@ -45,9 +46,9 @@ class Source extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'       => Yii::t('backend', 'ID'),
+            'id' => Yii::t('backend', 'ID'),
             'category' => Yii::t('backend', 'Category'),
-            'message'  => Yii::t('backend', 'Message'),
+            'message' => Yii::t('backend', 'Message'),
         ];
     }
 
@@ -69,14 +70,16 @@ class Source extends ActiveRecord
     public function getTranslation($language)
     {
         foreach ($this->translations as $translation) {
-            if ($translation->language == $language) return $translation;
+            if ($translation->language == $language) {
+                return $translation;
+            }
         }
 
         return null;
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getTranslations()
     {

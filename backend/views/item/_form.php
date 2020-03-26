@@ -8,6 +8,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Item */
 /* @var $categories */
+/* @var $tags */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -23,17 +24,25 @@ use yii\helpers\Html;
 
     <?php echo $form->field($model, 'quantity')->textInput() ?>
 
-    <?php echo $form->field($model, 'created_at')->textInput() ?>
-
-    <?php echo Select2::widget([
-        'name' => 'state_2',
-        'value' => '',
+    <?php echo $form->field($model, 'category_id')->widget(Select2::classname(), [
         'data' => $categories,
-        'options' => ['multiple' => false, 'placeholder' => 'Выберите категрию ...']
+        'options' => ['multiple' => false, 'placeholder' => 'Выберите категрию ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+    <?php echo $form->field($model, 'tags')->widget(Select2::classname(), [
+        'data' => $tags,
+        'options' => ['multiple' => true, 'placeholder' => 'Выберите тэги ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
     ]); ?>
 
+
     <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'),
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

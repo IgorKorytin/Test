@@ -3,8 +3,8 @@
 use common\grid\EnumColumn;
 use common\models\User;
 use trntv\yii\datetime\DateTimeWidget;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'User',
-]), ['create'], ['class' => 'btn btn-success']) ?>
+            'modelClass' => 'User',
+        ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([
@@ -74,11 +74,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'login' => function ($url) {
                         return Html::a(
-                                '<i class="fa fa-sign-in" aria-hidden="true"></i>',
-                                $url,
-                                [
-                                    'title' => Yii::t('backend', 'Login')
-                                ]
+                            '<i class="fa fa-sign-in" aria-hidden="true"></i>',
+                            $url,
+                            [
+                                'title' => Yii::t('backend', 'Login')
+                            ]
                         );
                     },
                 ],

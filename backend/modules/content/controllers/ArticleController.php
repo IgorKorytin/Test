@@ -87,18 +87,6 @@ class ArticleController extends Controller
     /**
      * @param integer $id
      *
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * @param integer $id
-     *
      * @return Article the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -109,6 +97,18 @@ class ArticleController extends Controller
         }
         throw new NotFoundHttpException('The requested page does not exist.');
 
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
 
 }

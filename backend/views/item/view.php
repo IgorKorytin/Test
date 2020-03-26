@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="item-view">
 
     <p>
-        <?php echo Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id],
+            ['class' => 'btn btn-primary']) ?>
         <?php echo Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -22,16 +23,30 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'title',
             'description:ntext',
+            'category',
             'quantity',
             'created_at',
             'updated_at',
+            array(
+                'label' => 'Tags',
+                'value' => function ($model) {
+                    if ($model->itemTags) {
+                        foreach ($model->itemTags as $tag) {
+                            $tags[] = $tag->tag;
+                        }
+                        return implode(", ", $tags);
+                    } else {
+                        return 'не задано';
+                    }
+
+                }
+            ),
+
         ],
     ]) ?>
 

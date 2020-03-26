@@ -1,5 +1,6 @@
 <?php
 
+use backend\modules\widget\models\search\MenuSearch;
 use common\grid\EnumColumn;
 use common\models\WidgetMenu;
 use yii\grid\GridView;
@@ -7,7 +8,7 @@ use yii\helpers\Html;
 
 /**
  * @var $this         yii\web\View
- * @var $searchModel  \backend\modules\widget\models\search\MenuSearch
+ * @var $searchModel  MenuSearch
  * @var $dataProvider yii\data\ActiveDataProvider
  * @var $model        common\models\WidgetMenu
  */
@@ -20,7 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-success collapsed-box">
     <div class="box-header with-border">
-        <h3 class="box-title"><?php echo Yii::t('backend', 'Create {modelClass}', ['modelClass' => 'Widget Menu']) ?></h3>
+        <h3 class="box-title"><?php echo Yii::t('backend', 'Create {modelClass}',
+                ['modelClass' => 'Widget Menu']) ?></h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
         </div>

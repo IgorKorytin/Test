@@ -80,18 +80,6 @@ class CategoryController extends Controller
     /**
      * @param integer $id
      *
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * @param integer $id
-     *
      * @return ArticleCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -101,5 +89,17 @@ class CategoryController extends Controller
             return $model;
         }
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
 }

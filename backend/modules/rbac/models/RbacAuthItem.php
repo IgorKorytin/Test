@@ -3,6 +3,8 @@
 namespace backend\modules\rbac\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "rbac_auth_item".
@@ -22,7 +24,7 @@ use Yii;
  * @property RbacAuthItem[] $children
  * @property RbacAuthItem[] $parents
  */
-class RbacAuthItem extends \yii\db\ActiveRecord
+class RbacAuthItem extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -42,7 +44,13 @@ class RbacAuthItem extends \yii\db\ActiveRecord
             [['type', 'created_at', 'updated_at'], 'integer'],
             [['description', 'data'], 'string'],
             [['name', 'rule_name'], 'string', 'max' => 64],
-            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacAuthRule::class, 'targetAttribute' => ['rule_name' => 'name']],
+            [
+                ['rule_name'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => RbacAuthRule::class,
+                'targetAttribute' => ['rule_name' => 'name']
+            ],
         ];
     }
 
@@ -63,7 +71,7 @@ class RbacAuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRbacAuthAssignments()
     {
@@ -71,7 +79,7 @@ class RbacAuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRuleName()
     {
@@ -79,7 +87,7 @@ class RbacAuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRbacAuthItemChildren()
     {
@@ -87,7 +95,7 @@ class RbacAuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRbacAuthItemChildren0()
     {
@@ -95,18 +103,20 @@ class RbacAuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getChildren()
     {
-        return $this->hasMany(RbacAuthItem::class, ['name' => 'child'])->viaTable('rbac_auth_item_child', ['parent' => 'name']);
+        return $this->hasMany(RbacAuthItem::class, ['name' => 'child'])->viaTable('rbac_auth_item_child',
+            ['parent' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getParents()
     {
-        return $this->hasMany(RbacAuthItem::class, ['name' => 'parent'])->viaTable('rbac_auth_item_child', ['child' => 'name']);
+        return $this->hasMany(RbacAuthItem::class, ['name' => 'parent'])->viaTable('rbac_auth_item_child',
+            ['child' => 'name']);
     }
 }

@@ -11,9 +11,10 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\i18n\DbMessageSource;
+use yii\web\ConflictHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ConflictHttpException;
 
 class DefaultController extends Controller
 {
@@ -48,7 +49,7 @@ class DefaultController extends Controller
         $translationComponent = Yii::$app->components["i18n"]["translations"]['*']['class'];
 
         // check if component is enabled
-        if ($translationComponent !== \yii\i18n\DbMessageSource::class) {
+        if ($translationComponent !== DbMessageSource::class) {
             throw new ConflictHttpException('The translation module cannot be displayed since the translation
             component is not using the "DbMessageSource" component.');
         }
@@ -98,9 +99,11 @@ class DefaultController extends Controller
                 : new Translation(['id' => $source->id, 'language' => $language]);
         }
 
-        $model = new MultiModel(['models' => ArrayHelper::merge([
-            'source' => $source,
-        ], $translationModels)]);
+        $model = new MultiModel([
+            'models' => ArrayHelper::merge([
+                'source' => $source,
+            ], $translationModels)
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Url::previous('translation-filter') ?: ['index']);
@@ -110,18 +113,6 @@ class DefaultController extends Controller
                 'languages' => $this->getLanguages(),
             ]);
         }
-    }
-
-    /**
-     * @param integer $id
-     *
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(Url::previous('translation-filter') ?: ['index']);
     }
 
     /**
@@ -137,5 +128,17 @@ class DefaultController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(Url::previous('translation-filter') ?: ['index']);
     }
 }

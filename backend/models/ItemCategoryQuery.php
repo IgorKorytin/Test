@@ -2,12 +2,15 @@
 
 namespace app\models;
 
+use Yii;
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[ItemCategory]].
  *
  * @see ItemCategory
  */
-class ItemCategoryQuery extends \yii\db\ActiveQuery
+class ItemCategoryQuery extends ActiveQuery
 {
     /*public function active()
     {
@@ -20,8 +23,9 @@ class ItemCategoryQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
-        if ($db === null)
-            $db= \Yii::$app->db;
+        if ($db === null) {
+            $db = Yii::$app->db;
+        }
         return parent::all($db);
     }
 
@@ -31,8 +35,9 @@ class ItemCategoryQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
-        if ($db === null)
-            $db= \Yii::$app->db;
+        if ($db === null) {
+            $db = Yii::$app->db;
+        }
         return parent::one($db);
     }
 }

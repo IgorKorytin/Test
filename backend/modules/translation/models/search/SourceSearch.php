@@ -86,10 +86,11 @@ class SourceSearch extends Source
             ->andFilterWhere(['like', '{{%i18n_source_message}}.message', $this->message]);
 
         foreach ($this->_translationSearch as $lang => $translationSearch) {
-            if (!empty($translationSearch))
+            if (!empty($translationSearch)) {
                 $query->innerJoin("{{%i18n_message}} $lang", "{{%i18n_source_message}}.id = $lang.id")
                     ->andFilterWhere(["$lang.language" => $this->stripLanguagePrefix($lang)])
                     ->andFilterWhere(['like', "$lang.translation", $translationSearch]);
+            }
         }
 
         return $dataProvider;

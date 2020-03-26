@@ -11,12 +11,11 @@ trait ModuleTrait
     /**
      * @return array
      */
-    public function getLanguages()
+    public function getPrefixedLanguages()
     {
         $languages = [];
-        foreach (Yii::$app->params['availableLocales'] as $locale => $name) {
-            if ($locale !== Yii::$app->sourceLanguage)
-                $languages[substr($locale, 0, 2)] = $name;
+        foreach ($this->getLanguages() as $lang => $name) {
+            $languages['lang_' . $lang] = $name;
         }
 
         return $languages;
@@ -25,11 +24,13 @@ trait ModuleTrait
     /**
      * @return array
      */
-    public function getPrefixedLanguages()
+    public function getLanguages()
     {
         $languages = [];
-        foreach ($this->getLanguages() as $lang => $name) {
-            $languages['lang_'.$lang] = $name;
+        foreach (Yii::$app->params['availableLocales'] as $locale => $name) {
+            if ($locale !== Yii::$app->sourceLanguage) {
+                $languages[substr($locale, 0, 2)] = $name;
+            }
         }
 
         return $languages;

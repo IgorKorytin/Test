@@ -90,18 +90,6 @@ class StorageController extends Controller
     /**
      * @param integer $id
      *
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * @param integer $id
-     *
      * @return FileStorageItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,5 +100,17 @@ class StorageController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
 }

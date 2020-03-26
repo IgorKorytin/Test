@@ -2,12 +2,12 @@
 
 namespace backend\modules\rbac\controllers;
 
-use Yii;
 use backend\modules\rbac\models\RbacAuthAssignment;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * RbacAuthAssignmentController implements the CRUD actions for RbacAuthAssignment model.
@@ -52,6 +52,23 @@ class RbacAuthAssignmentController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($item_name, $user_id),
         ]);
+    }
+
+    /**
+     * Finds the RbacAuthAssignment model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $item_name
+     * @param string $user_id
+     * @return RbacAuthAssignment the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($item_name, $user_id)
+    {
+        if (($model = RbacAuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     /**
@@ -104,22 +121,5 @@ class RbacAuthAssignmentController extends Controller
         $this->findModel($item_name, $user_id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the RbacAuthAssignment model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $item_name
-     * @param string $user_id
-     * @return RbacAuthAssignment the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($item_name, $user_id)
-    {
-        if (($model = RbacAuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 }

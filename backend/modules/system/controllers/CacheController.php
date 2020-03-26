@@ -6,11 +6,13 @@
 namespace backend\modules\system\controllers;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\caching\Cache;
 use yii\caching\TagDependency;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\HttpException;
+use yii\web\Response;
 
 /**
  * Class CacheController
@@ -49,10 +51,14 @@ class CacheController extends Controller
 
             if ($component instanceof Cache) {
                 $caches[$name] = ['name' => $name, 'class' => get_class($component)];
-            } else if (is_array($component) && isset($component['class']) && $this->isCacheClass($component['class'])) {
-                $caches[$name] = ['name' => $name, 'class' => $component['class']];
-            } else if (is_string($component) && $this->isCacheClass($component)) {
-                $caches[$name] = ['name' => $name, 'class' => $component];
+            } else {
+                if (is_array($component) && isset($component['class']) && $this->isCacheClass($component['class'])) {
+                    $caches[$name] = ['name' => $name, 'class' => $component['class']];
+                } else {
+                    if (is_string($component) && $this->isCacheClass($component)) {
+                        $caches[$name] = ['name' => $name, 'class' => $component];
+                    }
+                }
             }
         }
 
@@ -74,17 +80,17 @@ class CacheController extends Controller
     /**
      * @param $id
      *
-     * @return \yii\web\Response
+     * @return Response
      * @throws HttpException
      */
     public function actionFlushCache($id)
     {
         if ($this->getCache($id)->flush()) {
             Yii::$app->session->setFlash('alert', [
-                'body' => \Yii::t('backend', 'Cache has been successfully flushed'),
+                'body' => Yii::t('backend', 'Cache has been successfully flushed'),
                 'options' => ['class' => 'alert-success'],
             ]);
-        };
+        }
 
         return $this->redirect(['index']);
     }
@@ -92,9 +98,9 @@ class CacheController extends Controller
     /**
      * @param $id
      *
-     * @return \yii\caching\Cache|null
+     * @return Cache|null
      * @throws HttpException
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     protected function getCache($id)
     {
@@ -109,17 +115,17 @@ class CacheController extends Controller
      * @param $id
      * @param $key
      *
-     * @return \yii\web\Response
+     * @return Response
      * @throws HttpException
      */
     public function actionFlushCacheKey($id, $key)
     {
         if ($this->getCache($id)->delete($key)) {
             Yii::$app->session->setFlash('alert', [
-                'body' => \Yii::t('backend', 'Cache entry has been successfully deleted'),
+                'body' => Yii::t('backend', 'Cache entry has been successfully deleted'),
                 'options' => ['class' => 'alert-success'],
             ]);
-        };
+        }
 
         return $this->redirect(['index']);
     }
@@ -128,14 +134,14 @@ class CacheController extends Controller
      * @param $id
      * @param $tag
      *
-     * @return \yii\web\Response
+     * @return Response
      * @throws HttpException
      */
     public function actionFlushCacheTag($id, $tag)
     {
         TagDependency::invalidate($this->getCache($id), $tag);
         Yii::$app->session->setFlash('alert', [
-            'body' => \Yii::t('backend', 'TagDependency was invalidated'),
+            'body' => Yii::t('backend', 'TagDependency was invalidated'),
             'options' => ['class' => 'alert-success'],
         ]);
 

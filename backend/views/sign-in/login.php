@@ -1,10 +1,12 @@
 <?php
-use yii\helpers\Html;
+
+use backend\models\LoginForm;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \backend\models\LoginForm */
+/* @var $model LoginForm */
 
 $this->title = Yii::t('backend', 'Sign In');
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,7 +22,7 @@ $this->params['body-class'] = 'login-page';
         <div class="body">
             <?php echo $form->field($model, 'username') ?>
             <?php echo $form->field($model, 'password')->passwordInput() ?>
-            <?php echo $form->field($model, 'rememberMe')->checkbox(['class'=>'simple']) ?>
+            <?php echo $form->field($model, 'rememberMe')->checkbox(['class' => 'simple']) ?>
         </div>
         <div class="footer">
             <?php echo Html::submitButton(Yii::t('backend', 'Sign me in'), [
