@@ -58,8 +58,10 @@ class Category extends \yii\db\ActiveRecord
     public static function getList()
     {
         $categories = self::find()->all();
-        foreach ($categories as $category) {
-            $data[$category->id] = $category->category;
+        if ($categories) {
+            foreach ($categories as $category) {
+                $data[$category->id] = $category->category;
+            }
         }
 
         return $data;
