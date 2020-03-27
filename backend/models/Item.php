@@ -22,6 +22,8 @@ use yii\db\ActiveRecord;
  */
 class Item extends ActiveRecord
 {
+    public $_tags;
+
     /**
      * {@inheritdoc}
      */
@@ -29,8 +31,6 @@ class Item extends ActiveRecord
     {
         return 'item';
     }
-
-    public $_tags;
 
     /**
      * {@inheritdoc}
@@ -73,14 +73,6 @@ class Item extends ActiveRecord
     }
 
     /**
-     * @return ActiveQuery
-     */
-    public function getItemTags()
-    {
-        return $this->hasMany(ItemTags::className(), ['item_id' => 'id']);
-    }
-
-    /**
      * @return array
      */
     public function getTags()
@@ -100,6 +92,14 @@ class Item extends ActiveRecord
             $this->_tags = $this->tags;
         }
         return $this->_tags;
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getItemTags()
+    {
+        return $this->hasMany(ItemTags::className(), ['item_id' => 'id']);
     }
 
     /**
