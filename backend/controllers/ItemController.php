@@ -6,8 +6,8 @@ use app\models\Category;
 use app\models\Item;
 use app\models\ItemTags;
 use app\models\Tags;
+use backend\models\search\ItemSearch;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,12 +37,16 @@ class ItemController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Item::find(),
-        ]);
+
+        $searchModel = new ItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => Item::find(),
+//        ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

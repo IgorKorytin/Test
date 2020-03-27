@@ -47,7 +47,7 @@ class Item extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'quantity', 'category_id'], 'required'],
+            [['title', 'description', 'quantity', 'category_id'], 'required', 'on' => 'insert'],
             [['description'], 'string'],
             [['quantity', 'category_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -120,13 +120,5 @@ class Item extends ActiveRecord
         return true;
     }
 
-//    public function afterFind()
-//    {
-//    if ($this->itemTags){
-//          foreach ($this->itemTags as $itemTag) {
-//              $tags[]=$itemTag->tag;
-//          }
-//    }
-//    $this->$tags=implode( ", ", $tags);
-//    }
+
 }
