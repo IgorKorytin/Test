@@ -47,6 +47,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 }
             ),
+//            [
+//                'attribute' => 'tags',
+//                'label' => 'Tags',
+//                'filter' => Select2::widget([
+//
+////                    'name' => 'tags',
+//                    'data' => Tags::getList(),
+//                    'value' => function ($model) {
+//                    if ($model->itemTags) {
+//                        foreach ($model->itemTags as $tag) {
+//                            $tags[] = $tag->tag;
+//                        }
+//                        return implode(", ", $tags);
+//                    } else {
+//                        return 'не задано';
+//                    }
+//
+//                },
+//                    'options' => [
+//                        'class' => 'form-control',
+//                        'placeholder' => 'Выберите значение'
+//                    ],
+//                    'pluginOptions' => [
+//                        'allowClear' => true,
+//                        'selectOnClose' => true,
+//                    ]
+//                ])
+//
+//            ],
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
